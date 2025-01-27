@@ -48,10 +48,8 @@ public class SecurityConfig {
     // loadUserByUsername je jedina metoda interfejsa UserDetailsService
     @Bean
     UserDetailsService userDetailsService(){
-        return username -> {
-            return userRepository.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        };
+        return username -> userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean
