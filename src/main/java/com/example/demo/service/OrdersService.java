@@ -64,7 +64,6 @@ public class OrdersService {
         double totalAmount = 0;
         StringBuilder orderDetails = new StringBuilder("<h3>Your Order Details:</h3><ul>");
 
-        // Check stock before modifying the database
         for (CartItem cartItem : cartItems) {
             Product product = productRepository.findById(cartItem.getProduct().getId())
                     .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
@@ -74,7 +73,6 @@ public class OrdersService {
             }
         }
 
-        // Process the order after stock validation
         for (CartItem cartItem : cartItems) {
             Product product = productRepository.findById(cartItem.getProduct().getId()).get();
 
@@ -99,10 +97,8 @@ public class OrdersService {
         order.setTotalAmount(totalAmount);
         ordersRepository.save(order);
 
-        // Delete the cart
         cartRepository.delete(cart);
 
-        // Send order confirmation email
         String emailBody = orderDetails.append("</ul><br><strong>Total Amount: $").append(totalAmount).append("</strong>").toString();
         mailService.sendOrderConfirmation(user.getEmail(), "Order Confirmation - #" + order.getId(), emailBody);
 

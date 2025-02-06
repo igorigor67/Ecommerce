@@ -57,8 +57,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Funkcionise kao implementacija loadUserByUsername metode iz UserDetailsService
-    // loadUserByUsername je jedina metoda interfejsa UserDetailsService
     @Bean
     UserDetailsService userDetailsService(){
         return username -> userRepository.findByUsername(username)
