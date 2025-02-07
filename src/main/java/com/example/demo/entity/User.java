@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,6 +41,7 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
 
     @Override
@@ -132,7 +132,6 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
     }
 }

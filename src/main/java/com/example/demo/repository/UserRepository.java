@@ -10,9 +10,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     boolean existsByContactNumber(String contactNumber);
     boolean existsByUsername(String username);
 
-    // Returns User or Null if not found
-    // Enables .orElseThrow()
-    Optional<User> findByEmail(String email);
+
 
     Optional<User> findByUsername(String username);
 }
